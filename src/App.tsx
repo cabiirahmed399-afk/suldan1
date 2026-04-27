@@ -272,7 +272,7 @@ export default function App() {
       <div className="mesh-gradient bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-brand-purple/20 rounded-full blur-[120px]"></div>
 
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 glass px-10 py-6 flex justify-between items-center transition-all">
+      <nav className="fixed top-0 w-full z-50 glass px-4 md:px-10 py-4 md:py-6 flex justify-between items-center transition-all">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 bg-gradient-to-tr from-brand-blue to-brand-purple rounded-lg rotate-12 group-hover:rotate-0 transition-transform"></div>
           <span className="text-xl font-bold tracking-tight italic text-white font-display">CREATIFY</span>
@@ -322,10 +322,10 @@ export default function App() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 20 }}
-            className="fixed inset-0 z-40 bg-bg-deep/95 backdrop-blur-3xl pt-32 px-10 flex flex-col gap-8 text-4xl font-display"
+            className="fixed inset-0 z-40 bg-bg-deep/98 backdrop-blur-3xl pt-32 px-6 md:px-10 flex flex-col gap-6 md:gap-8 text-3xl md:text-4xl font-display overflow-y-auto"
           >
             {['Portfolio', 'Mockups', 'Brief', 'Reviews', 'Contact'].map(link => (
-              <a key={link} href={`#${link.toLowerCase()}`} onClick={() => setIsMenuOpen(false)}>{link}</a>
+              <a key={link} href={`#${link.toLowerCase()}`} onClick={() => setIsMenuOpen(false)} className="hover:text-brand-blue transition-colors">{link}</a>
             ))}
           </motion.div>
         )}
@@ -333,7 +333,7 @@ export default function App() {
 
       <main className="relative z-10">
         {/* Hero Section */}
-        <section className="h-screen flex items-center px-10 max-w-7xl mx-auto">
+        <section className="min-h-screen flex items-center px-6 md:px-10 max-w-[1600px] mx-auto py-32 lg:py-0">
           <div className="w-full">
             <motion.div
               initial={{ opacity: 0, y: 50 }}
@@ -342,20 +342,20 @@ export default function App() {
             >
               <div className="flex items-center gap-4 mb-6 opacity-60">
                 <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-                <span className="text-[10px] uppercase tracking-[0.3em] font-medium">Available for new requests</span>
+                <span className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] font-medium">Available for new requests</span>
               </div>
-              <h1 className="text-7xl md:text-[10rem] font-bold tracking-tighter leading-[0.8] mb-12">
+              <h1 className="text-5xl sm:text-7xl md:text-[8rem] lg:text-[10rem] 2xl:text-[12rem] font-bold tracking-tighter leading-[0.85] md:leading-[0.8] mb-12">
                 DESIGN <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue via-brand-purple to-white">ELATED</span>
               </h1>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-end">
-                <p className="text-white/40 text-lg md:text-xl max-w-md leading-relaxed">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-end">
+                <p className="text-white/40 text-base md:text-lg lg:text-xl max-w-md leading-relaxed">
                   High-end branding, posters, and digital art tailored for visionary brands that dare to disrupt.
                 </p>
-                <div className="flex gap-4">
-                  <a href="#brief" className="px-10 py-5 bg-brand-blue hover:bg-brand-blue/80 text-white font-bold rounded-2xl transition-all shadow-xl shadow-brand-blue/20">
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <a href="#brief" className="w-full sm:w-auto px-8 md:px-10 py-5 bg-brand-blue hover:bg-brand-blue/80 text-white font-bold rounded-2xl transition-all shadow-xl shadow-brand-blue/20 text-center">
                     START PROJECT
                   </a>
-                  <a href="#portfolio" className="px-10 py-5 border border-white/10 hover:bg-white/5 text-white font-bold rounded-2xl transition-all">
+                  <a href="#portfolio" className="w-full sm:w-auto px-8 md:px-10 py-5 border border-white/10 hover:bg-white/5 text-white font-bold rounded-2xl transition-all text-center">
                     EXPLORE WORKS
                   </a>
                 </div>
@@ -365,32 +365,32 @@ export default function App() {
         </section>
 
         {/* Portfolio Section */}
-        <section id="portfolio" className="py-32 px-10 max-w-7xl mx-auto">
+        <section id="portfolio" className="py-24 md:py-32 px-6 md:px-10 max-w-[1600px] mx-auto">
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8"
+            className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-16 gap-10"
           >
-            <div className="flex-1">
+            <div className="flex-1 w-full lg:w-auto">
               <p className="text-[10px] uppercase tracking-[0.4em] text-brand-blue font-bold mb-4">GALLERY</p>
-              <h3 className="text-5xl md:text-6xl font-bold font-display mb-8">Featured Works</h3>
-              <div className="relative max-w-md">
+              <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display mb-8">Featured Works</h3>
+              <div className="relative w-full max-w-md">
                 <input 
                   type="text" 
                   placeholder="Search projects..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:border-brand-blue outline-none text-sm"
+                  className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:border-brand-blue outline-none text-sm transition-all"
                 />
               </div>
             </div>
-            <div className="flex flex-wrap gap-3 justify-end max-w-md">
+            <div className="flex flex-wrap gap-2 md:gap-3 justify-start lg:justify-end max-w-2xl">
               {categories.map(cat => (
                 <button 
                   key={cat}
                   onClick={() => toggleCategory(cat)}
-                  className={`px-5 py-2 rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all ${selectedCategories.includes(cat) ? 'bg-white text-black' : 'border border-white/10 text-white/40 hover:border-white/30'}`}
+                  className={`px-4 md:px-5 py-2 rounded-xl text-[9px] md:text-[10px] font-bold uppercase tracking-widest transition-all ${selectedCategories.includes(cat) ? 'bg-white text-black' : 'border border-white/10 text-white/40 hover:border-white/30'}`}
                 >
                   {cat}
                 </button>
@@ -398,7 +398,7 @@ export default function App() {
             </div>
           </motion.div>
 
-          <div className="grid grid-cols-12 gap-8">
+          <div className="grid grid-cols-12 gap-4 md:gap-8">
             {filteredItems.map((item, idx) => (
               <motion.div
                 key={item.id}
@@ -407,7 +407,7 @@ export default function App() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
-                className={`group relative overflow-hidden rounded-[32px] border border-white/5 ${idx % 3 === 0 ? 'col-span-12 md:col-span-8 h-[500px]' : 'col-span-12 md:col-span-4 h-[500px]'}`}
+                className={`group relative overflow-hidden rounded-[24px] md:rounded-[32px] border border-white/5 ${idx % 3 === 0 ? 'col-span-12 lg:col-span-8 h-[350px] md:h-[500px]' : 'col-span-12 lg:col-span-4 h-[350px] md:h-[500px]'}`}
               >
                 <img src={item.imageUrl} alt={item.title} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-bg-deep via-transparent to-transparent opacity-90 transition-opacity"></div>
@@ -426,14 +426,14 @@ export default function App() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="py-32 bg-white/5 border-y border-white/5 px-10"
+          className="py-24 md:py-32 bg-white/5 border-y border-white/5 px-6 md:px-10"
         >
-          <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+          <div className="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
              <motion.div 
                initial={{ opacity: 0, x: -30 }}
                whileInView={{ opacity: 1, x: 0 }}
                viewport={{ once: true }}
-               className="relative aspect-square glass rounded-[48px] flex items-center justify-center p-12"
+               className="relative aspect-square glass rounded-[32px] md:rounded-[48px] flex items-center justify-center p-6 md:p-12 overflow-hidden"
              >
                <AnimatePresence mode="wait">
                  <motion.div 
@@ -449,7 +449,7 @@ export default function App() {
                      </div>
                    )}
                    {mockupView === 'phone' && (
-                     <div className="w-[300px] h-[600px] mx-auto bg-zinc-900 border-[12px] border-zinc-800 rounded-[56px] shadow-3xl relative overflow-hidden">
+                     <div className="w-full max-w-[280px] md:max-w-[300px] aspect-[9/18] mx-auto bg-zinc-900 border-[8px] md:border-[12px] border-zinc-800 rounded-[40px] md:rounded-[56px] shadow-3xl relative overflow-hidden">
                         <img src={PORTFOLIO_ITEMS[3].imageUrl} className="w-full h-full object-cover" alt="mockup" />
                      </div>
                    )}
@@ -552,40 +552,40 @@ export default function App() {
                      </div>
                    )}
                    {mockupView === 'card_luxury' && (
-                     <div className="w-[400px] h-[230px] mx-auto bg-zinc-900 border border-white/20 shadow-3xl rounded-xl p-8 flex flex-col justify-between relative overflow-hidden">
-                        <div className="absolute top-0 right-0 w-48 h-48 bg-brand-purple/10 blur-3xl -rotate-45"></div>
+                     <div className="w-full max-w-[400px] aspect-[1.7/1] mx-auto bg-zinc-900 border border-white/20 shadow-3xl rounded-xl p-6 md:p-8 flex flex-col justify-between relative overflow-hidden">
+                        <div className="absolute top-0 right-0 w-32 md:w-48 h-32 md:h-48 bg-brand-purple/10 blur-2xl md:blur-3xl -rotate-45"></div>
                         <div className="flex justify-between items-start relative z-10">
-                          <div className="w-12 h-12 bg-gradient-to-br from-brand-purple to-white/10 rounded-lg"></div>
-                          <div className="text-[10px] font-mono text-white/40 tracking-widest">LUXURY COLLECTION</div>
+                          <div className="w-8 h-8 md:w-12 md:h-12 bg-gradient-to-br from-brand-purple to-white/10 rounded-lg"></div>
+                          <div className="text-[8px] md:text-[10px] font-mono text-white/40 tracking-widest">LUXURY COLLECTION</div>
                         </div>
                         <div className="relative z-10">
-                          <div className="text-2xl font-bold tracking-tight mb-1 font-display">ONYX DESIGN</div>
-                          <div className="text-[10px] text-brand-purple font-bold uppercase tracking-[0.3em]">Premium Grade Packaging</div>
+                          <div className="text-xl md:text-2xl font-bold tracking-tight mb-1 font-display uppercase italic text-transparent bg-clip-text bg-gradient-to-r from-white to-white/60">ONYX DESIGN</div>
+                          <div className="text-[8px] md:text-[10px] text-brand-purple font-bold uppercase tracking-[0.3em]">Premium Grade Packaging</div>
                         </div>
                      </div>
                    )}
                    {mockupView === 'banner_wide' && (
-                     <div className="w-full h-3/4 my-auto bg-zinc-900 border border-white/10 shadow-3xl rounded-3xl relative overflow-hidden group">
+                     <div className="w-full h-full md:h-3/4 my-auto bg-zinc-900 border border-white/10 shadow-3xl rounded-2xl md:rounded-3xl relative overflow-hidden group">
                         <img src={PORTFOLIO_ITEMS[2].imageUrl} className="w-full h-full object-cover opacity-50 scale-110 group-hover:scale-100 transition-transform duration-1000" alt="mockup" />
                         <div className="absolute inset-0 bg-gradient-to-r from-bg-deep via-transparent to-transparent"></div>
-                        <div className="absolute inset-0 flex flex-col justify-center px-16">
-                           <div className="text-brand-blue font-bold text-[10px] mb-4 tracking-[0.5em] uppercase">Outdoor Media</div>
-                           <h4 className="text-4xl font-bold tracking-tighter mb-4 max-w-sm">COMMAND ATTENTION.</h4>
-                           <div className="flex gap-4">
-                             <div className="w-12 h-1 bg-brand-blue rounded-full"></div>
-                             <div className="w-4 h-1 bg-white/20 rounded-full"></div>
+                        <div className="absolute inset-0 flex flex-col justify-center px-8 md:px-16">
+                           <div className="text-brand-blue font-bold text-[8px] md:text-[10px] mb-2 md:mb-4 tracking-[0.5em] uppercase">Outdoor Media</div>
+                           <h4 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tighter mb-4 max-w-[200px] md:max-w-sm">COMMAND ATTENTION.</h4>
+                           <div className="flex gap-3 md:gap-4">
+                             <div className="w-8 md:w-12 h-0.5 md:h-1 bg-brand-blue rounded-full"></div>
+                             <div className="w-3 md:w-4 h-0.5 md:h-1 bg-white/20 rounded-full"></div>
                            </div>
                         </div>
                      </div>
                    )}
                    {mockupView === 'banner_social' && (
-                     <div className="w-[320px] h-full mx-auto bg-zinc-900 border border-white/10 shadow-3xl rounded-[40px] relative overflow-hidden">
+                     <div className="w-full max-w-[280px] md:w-[320px] h-full mx-auto bg-zinc-900 border border-white/10 shadow-3xl rounded-[32px] md:rounded-[40px] relative overflow-hidden">
                         <img src={PORTFOLIO_ITEMS[0].imageUrl} className="w-full h-full object-cover grayscale-[0.5]" alt="mockup" />
                         <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]"></div>
-                        <div className="absolute bottom-16 left-10 right-10 text-center">
-                           <div className="bg-brand-blue px-4 py-2 rounded-full text-[10px] font-bold inline-block mb-4 tracking-widest">UPCOMING EVENT</div>
-                           <h4 className="text-3xl font-bold tracking-tight mb-4">PULSE MUSIC FEST</h4>
-                           <div className="w-full h-12 bg-white text-black rounded-xl flex items-center justify-center font-bold text-xs">SWIPE UP</div>
+                        <div className="absolute bottom-10 md:bottom-16 left-6 md:left-10 right-6 md:right-10 text-center">
+                           <div className="bg-brand-blue px-3 md:px-4 py-1.5 md:py-2 rounded-full text-[8px] md:text-[10px] font-bold inline-block mb-3 md:mb-4 tracking-widest">UPCOMING EVENT</div>
+                           <h4 className="text-2xl md:text-3xl font-bold tracking-tight mb-4 leading-tight">PULSE MUSIC FEST</h4>
+                           <div className="w-full h-10 md:h-12 bg-white text-black rounded-xl flex items-center justify-center font-bold text-[10px] md:text-xs">SWIPE UP</div>
                         </div>
                      </div>
                    )}
@@ -619,19 +619,19 @@ export default function App() {
                <h3 className="text-5xl md:text-6xl font-bold font-display mb-8">Real-world Preview</h3>
                <p className="text-white/40 text-lg mb-12 max-w-md">Our integrated mockup system allows you to visualize potential designs in production environments before the first pixel is finalized.</p>
                
-               <div className="flex flex-col gap-4">
+               <div className="flex flex-col gap-3 md:gap-4">
                  {MOCKUP_TEMPLATES.map((t) => (
                    <motion.button 
                      key={t.id}
                      onClick={() => setMockupView(t.id)}
                      whileHover={{ scale: 1.02, borderColor: 'rgba(255,255,255,0.2)', boxShadow: '0 0 30px rgba(59,130,246,0.1)' }}
-                     className={`flex items-center gap-5 p-6 rounded-3xl transition-all ${mockupView === t.id ? 'bg-white/10 border border-white/20' : 'bg-transparent border border-white/5'}`}
+                     className={`flex items-center gap-4 md:gap-5 p-4 md:p-6 rounded-[24px] md:rounded-3xl transition-all ${mockupView === t.id ? 'bg-white/10 border border-white/20' : 'bg-transparent border border-white/5'}`}
                    >
-                     <div className={`p-4 rounded-2xl ${mockupView === t.id ? 'bg-brand-purple' : 'bg-white/5'}`}>
-                       <t.icon className="w-6 h-6" />
+                     <div className={`p-3 md:p-4 rounded-xl md:rounded-2xl ${mockupView === t.id ? 'bg-brand-purple' : 'bg-white/5'}`}>
+                       <t.icon className="w-5 h-5 md:w-6 md:h-6" />
                      </div>
                      <div className="text-left">
-                       <div className="font-bold text-sm tracking-wide">{t.name}</div>
+                       <div className="font-bold text-xs md:text-sm tracking-wide">{t.name}</div>
                      </div>
                    </motion.button>
                  ))}
@@ -709,13 +709,13 @@ export default function App() {
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="py-32 px-10 max-w-7xl mx-auto"
+          className="py-24 md:py-32 px-6 md:px-10 max-w-[1600px] mx-auto"
         >
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
             <div className="lg:col-span-5">
               <p className="text-[10px] uppercase tracking-[0.4em] text-brand-blue font-bold mb-4">START PROJECT</p>
-                <h3 className="text-5xl font-bold font-display mb-6">Brief Refiner</h3>
-                <p className="text-white/40 mb-10 leading-relaxed">Describe your idea, and our AI design consultant will help you uncover details like mood, palette, and audience for a perfect outcome.</p>
+                <h3 className="text-4xl md:text-5xl font-bold font-display mb-6">Brief Refiner</h3>
+                <p className="text-white/40 mb-10 leading-relaxed text-sm md:text-base">Describe your idea, and our AI design consultant will help you uncover details like mood, palette, and audience for a perfect outcome.</p>
 
                 <div className="glass p-8 rounded-[40px]">
                   <div className="flex items-center gap-3 mb-6 text-brand-blue">
@@ -779,23 +779,23 @@ export default function App() {
                   </div>
                 ) : (
                   <form onSubmit={handleSubmitRequest} className="space-y-8">
-                    <div className="grid grid-cols-2 gap-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
                       <div className="space-y-2">
-                        <label className="text-[10px] uppercase tracking-widest font-bold text-white/30 ml-2">Name</label>
+                        <label className="text-[9px] md:text-[10px] uppercase tracking-widest font-bold text-white/30 ml-2">Name</label>
                         <input 
                           type="text" required
                           value={formData.name}
                           onChange={(e) => setFormData({...formData, name: e.target.value})}
-                          className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:border-brand-blue outline-none"
+                          className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:border-brand-blue outline-none transition-all"
                         />
                       </div>
                       <div className="space-y-2">
-                        <label className="text-[10px] uppercase tracking-widest font-bold text-white/30 ml-2">Email</label>
+                        <label className="text-[9px] md:text-[10px] uppercase tracking-widest font-bold text-white/30 ml-2">Email</label>
                         <input 
                           type="email" required
                           value={formData.email}
                           onChange={(e) => setFormData({...formData, email: e.target.value})}
-                          className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:border-brand-blue outline-none"
+                          className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:border-brand-blue outline-none transition-all"
                         />
                       </div>
                     </div>
@@ -853,9 +853,9 @@ export default function App() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: "-100px" }}
-          className="py-32 px-10 max-w-7xl mx-auto border-t border-white/5"
+          className="py-24 md:py-32 px-6 md:px-10 max-w-[1600px] mx-auto border-t border-white/5"
         >
-          <div className="text-center mb-24">
+          <div className="text-center mb-16 md:mb-24">
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -869,13 +869,13 @@ export default function App() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-5xl md:text-6xl font-bold font-display"
+              className="text-4xl md:text-5xl lg:text-6xl font-bold font-display"
             >
               Client Voices
             </motion.h3>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+ 
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
             {TESTIMONIALS.map((testi, idx) => (
               <motion.div 
                 key={testi.id} 
@@ -883,28 +883,28 @@ export default function App() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.2 }}
-                className="glass p-12 rounded-[48px] relative overflow-hidden group"
+                className="glass p-8 md:p-12 rounded-[32px] md:rounded-[48px] relative overflow-hidden group"
               >
-                <div className="absolute top-0 right-0 p-8 opacity-5">
-                   <Quote className="w-32 h-32" />
+                <div className="absolute top-0 right-0 p-8 opacity-[0.02] md:opacity-5">
+                   <Quote className="w-16 h-16 md:w-32 md:h-32" />
                 </div>
                 <div className="relative z-10">
-                  <div className="flex gap-1 mb-8">
+                  <div className="flex gap-1 mb-6 md:mb-8">
                     {[...Array(testi.rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-brand-blue text-brand-blue" />
+                      <Star key={i} className="w-3 h-3 md:w-4 md:h-4 fill-brand-blue text-brand-blue" />
                     ))}
                   </div>
-                  <p className="text-2xl font-medium leading-relaxed mb-10 text-white/90 italic">"{testi.content}"</p>
+                  <p className="text-lg md:text-2xl font-medium leading-relaxed mb-8 md:mb-10 text-white/90 italic">"{testi.content}"</p>
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-4">
-                      <img src={testi.avatar} alt={testi.name} className="w-12 h-12 rounded-full border border-white/10" />
+                    <div className="flex items-center gap-3 md:gap-4">
+                      <img src={testi.avatar} alt={testi.name} className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/10" />
                       <div>
-                        <p className="font-bold text-sm">{testi.name}</p>
-                        <p className="text-[10px] text-white/40 uppercase tracking-widest">{testi.role}, {testi.company}</p>
+                        <p className="font-bold text-xs md:text-sm">{testi.name}</p>
+                        <p className="text-[8px] md:text-[10px] text-white/40 uppercase tracking-widest">{testi.role}, {testi.company}</p>
                       </div>
                     </div>
                     {testi.projectId && (
-                      <a href="#portfolio" className="text-[10px] font-bold text-brand-blue hover:underline uppercase tracking-widest">View Project</a>
+                      <a href="#portfolio" className="text-[9px] md:text-[10px] font-bold text-brand-blue hover:underline uppercase tracking-widest hidden sm:block">View Project</a>
                     )}
                   </div>
                 </div>
@@ -914,26 +914,26 @@ export default function App() {
         </motion.section>
 
         {/* Footer */}
-        <footer id="contact" className="bg-bg-deep pt-32 pb-16 px-10 border-t border-white/5">
-          <div className="max-w-7xl mx-auto flex flex-col items-center">
-             <div className="flex items-center gap-3 mb-12">
-               <div className="w-8 h-8 bg-gradient-to-tr from-brand-blue to-brand-purple rounded-lg"></div>
-               <span className="text-2xl font-bold tracking-tight italic text-white font-display">CREATIFY</span>
+        <footer id="contact" className="bg-bg-deep pt-24 md:pt-32 pb-12 md:pb-16 px-6 md:px-10 border-t border-white/5">
+          <div className="max-w-[1600px] mx-auto flex flex-col items-center">
+             <div className="flex items-center gap-3 mb-10 md:mb-12">
+               <div className="w-8 h-8 bg-gradient-to-tr from-brand-blue to-brand-purple rounded-lg shadow-lg shadow-brand-blue/20"></div>
+               <span className="text-xl md:text-2xl font-bold tracking-tight italic text-white font-display uppercase">CREATIFY</span>
              </div>
-
-            <div className="flex gap-8 mb-16">
+ 
+            <div className="flex gap-6 md:gap-8 mb-12 md:mb-16">
               {[Twitter, Instagram, Dribbble, MessageSquare].map((Icon, i) => (
-                <a key={i} href="#" className="p-4 rounded-full border border-white/10 hover:bg-white/5 transition-all text-white/40 hover:text-white">
-                  <Icon className="w-6 h-6" />
+                <a key={i} href="#" className="p-3 md:p-4 rounded-full border border-white/10 hover:bg-white/5 transition-all text-white/40 hover:text-white hover:scale-110 active:scale-95">
+                  <Icon className="w-5 h-5 md:w-6 md:h-6" />
                 </a>
               ))}
             </div>
-
-            <div className="w-full pt-16 flex flex-col md:flex-row justify-between items-center gap-8 text-[10px] font-mono text-white/20 uppercase tracking-[0.3em] font-medium">
+ 
+            <div className="w-full pt-12 md:pt-16 flex flex-col md:flex-row justify-between items-center gap-6 md:gap-8 text-[9px] md:text-[10px] font-mono text-white/20 uppercase tracking-[0.2em] md:tracking-[0.3em] font-medium text-center md:text-left">
               <p>© 2026 CREATIFY STUDIO — PIXEL PERFECT ALWAYS.</p>
-              <div className="flex gap-12">
-                <a href="#" className="hover:text-white">Privacy</a>
-                <a href="#" className="hover:text-white">Terms</a>
+              <div className="flex gap-8 md:gap-12">
+                <a href="#" className="hover:text-white transition-colors">Privacy</a>
+                <a href="#" className="hover:text-white transition-colors">Terms</a>
               </div>
             </div>
           </div>
