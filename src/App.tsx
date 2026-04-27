@@ -143,6 +143,8 @@ export default function App() {
   const [user, setUser] = useState<any>(null);
   const [requestStatus, setRequestStatus] = useState<RequestStatus>(RequestStatus.IDLE);
   const [mockupView, setMockupView] = useState('poster');
+  const [authError, setAuthError] = useState<string | null>(null);
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [mockupSettings, setMockupSettings] = useState({
     cardFront: PORTFOLIO_ITEMS[2].imageUrl,
     cardBack: PORTFOLIO_ITEMS[0].imageUrl,
@@ -180,8 +182,26 @@ export default function App() {
   }, []);
 
   const login = async () => {
-    const provider = new GoogleAuthProvider();
-    await signInWithPopup(auth, provider);
+    if (isLoggingIn) return;
+    setIsLoggingIn(true);
+    setAuthError(null);
+    try {
+      const provider = new GoogleAuthProvider();
+      await signInWithPopup(auth, provider);
+    } catch (error: any) {
+      if (error.code === 'auth/popup-blocked') {
+        setAuthError('Sign-in popup blocked. Please enable popups for this site.');
+      } else if (error.code === 'auth/cancelled-popup-request') {
+        setAuthError('Sign-in cancelled. Please try again.');
+      } else if (error.code === 'auth/popup-closed-by-user') {
+        // Just ignore if they closed it themselves
+      } else {
+        console.error("Auth Error:", error);
+        setAuthError('An unexpected authentication error occurred.');
+      }
+    } finally {
+      setIsLoggingIn(false);
+    }
   };
 
   const categories = ['All', ...Array.from(new Set(PORTFOLIO_ITEMS.map(i => i.category)))];
@@ -266,9 +286,29 @@ export default function App() {
           {user ? (
             <img src={user.photoURL} alt={user.displayName} className="w-8 h-8 rounded-full border border-white/20" />
           ) : (
-            <button onClick={login} className="text-white hover:text-brand-blue transition-colors">LOGIN</button>
+            <button 
+              onClick={login} 
+              disabled={isLoggingIn}
+              className={`text-white hover:text-brand-blue transition-colors ${isLoggingIn ? 'opacity-50 cursor-not-allowed' : ''}`}
+            >
+              {isLoggingIn ? 'LOGGING IN...' : 'LOGIN'}
+            </button>
           )}
         </div>
+
+        <AnimatePresence>
+          {authError && (
+            <motion.div 
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="absolute top-24 left-1/2 -translate-x-1/2 bg-red-500/90 backdrop-blur-md text-white text-[10px] uppercase font-bold tracking-widest px-6 py-3 rounded-full shadow-2xl border border-white/10 z-[60]"
+            >
+              {authError}
+              <button onClick={() => setAuthError(null)} className="ml-4 hover:opacity-50">×</button>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
           {isMenuOpen ? <X /> : <Menu />}
