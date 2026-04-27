@@ -1,0 +1,47 @@
+{
+  "entities": {
+    "DesignProject": {
+      "title": "Design Project",
+      "description": "A featured portfolio project",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "category": { "type": "string", "enum": ["Poster", "Branding", "Logo", "Social Media"] },
+        "imageUrl": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "description", "category", "imageUrl", "createdAt"]
+    },
+    "DesignRequest": {
+      "title": "Design Request",
+      "description": "A client request for a new design",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "designType": { "type": "string", "enum": ["Poster", "Logo", "Banner", "Social Media"] },
+        "details": { "type": "string" },
+        "referenceImage": { "type": "string" },
+        "budget": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "reviewed", "completed"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "email", "designType", "details", "status", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/projects/{projectId}": {
+      "schema": "DesignProject",
+      "description": "Featured portfolio projects"
+    },
+    "/requests/{requestId}": {
+      "schema": "DesignRequest",
+      "description": "Client design requests"
+    },
+    "/admins/{adminId}": {
+      "schema": { "type": "object", "properties": { "role": { "type": "string" } } },
+      "description": "Admin users"
+    }
+  }
+}

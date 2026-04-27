@@ -1,0 +1,44 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Global helpers
+    function isValidId(id) { return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$'); }
+    function isSignedIn() { return request.auth != null; }
+    function isAdmin() { return isSignedIn() && exists(/databases/$(database)/documents/admins/$(request.auth.uid)); }
+    function incoming() { return request.resource.data; }
+    function existing() { return resource.data; }
+
+    // Projects: Anyone can read, only Admins can write
+    match /projects/{projectId} {
+      allow get: if true;
+      allow list: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    // Design Requests: Users can create, Admins can read/write
+    match /requests/{requestId} {
+      function isValidRequest(data) {
+        return data.name is string && data.name.size() > 0 && data.name.size() <= 100 &&
+               data.email is string && data.email.size() > 0 && data.email.size() <= 100 &&
+               data.designType in ['Poster', 'Logo', 'Banner', 'Social Media'] &&
+               data.details is string && data.details.size() > 0 && data.details.size() <= 2000 &&
+               data.status == 'pending' &&
+               data.createdAt == request.time;
+      }
+
+      allow create: if isValidId(requestId) && isValidRequest(incoming());
+      allow read, update, delete: if isAdmin();
+    }
+
+    // Admins: Only Admins can read/write (managed via console or initial bootstrap)
+    match /admins/{adminId} {
+      allow read: if isSignedIn() && (request.auth.uid == adminId || isAdmin());
+      allow write: if false; // Only manageable via Firebase Console for security
+    }
+  }
+}
